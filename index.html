@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>داونلۆدەری تیکتۆک | پڕۆفیشناڵ</title>
+    <title>داونلۆدەری تیکتۆک</title>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Arabic:wght@400;700&display=swap" rel="stylesheet">
     
     <style>
@@ -17,7 +17,6 @@
         html, body {
             width: 100%;
             height: 100%;
-            /* چارەسەری جوڵانی لایەکان */
             overflow-x: hidden; 
             background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
         }
@@ -30,7 +29,6 @@
             padding: 15px;
         }
 
-        /* Glassmorphism Container */
         .container {
             background: rgba(255, 255, 255, 0.05);
             backdrop-filter: blur(15px);
@@ -65,14 +63,18 @@
             line-height: 1.6;
         }
 
-        .input-group {
+        /* بۆکسێکی تایبەت بۆ کۆنتڕۆڵکردنی ئینپوت و دوگمەی پەیست لە ناویدا */
+        .input-container {
+            position: relative;
             width: 100%;
             margin-bottom: 20px;
+            display: flex;
+            align-items: center;
         }
 
         input {
             width: 100%;
-            padding: 15px;
+            padding: 15px 15px 15px 65px; /* فەزا بۆ لای چەپ بۆ ئەوەی دەقەکە نەچێتە سەر دوگمەی پەیست */
             border-radius: 10px;
             border: 1px solid rgba(255, 255, 255, 0.2);
             background: rgba(0, 0, 0, 0.2);
@@ -81,11 +83,32 @@
             outline: none;
             transition: 0.3s;
             text-align: right;
+            direction: ltr; /* بۆ ئەوەی بەستەری ئینگلیزی تیکتۆک ڕێک دەربکەوێت */
         }
 
         input:focus {
             border-color: #4facfe;
             box-shadow: 0 0 10px rgba(79, 172, 254, 0.4);
+        }
+
+        /* دوگمەی پەیستکردنی ناو بۆکسەکە */
+        .paste-btn {
+            position: absolute;
+            left: 8px;
+            background: rgba(255, 255, 255, 0.15);
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            color: #fff;
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-size: 12px;
+            cursor: pointer;
+            transition: 0.2s;
+            font-weight: bold;
+        }
+
+        .paste-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+            color: #00f2fe;
         }
 
         .main-btn {
@@ -165,7 +188,6 @@
             cursor: pointer;
         }
 
-        /* Loading Spinner */
         .loader {
             display: none;
             border: 4px solid rgba(255,255,255,0.1);
@@ -202,11 +224,31 @@
             transition: 0.3s;
             box-shadow: 0 4px 15px rgba(0, 234, 144, 0.3);
             width: 100%;
+            margin-bottom: 10px;
         }
         
         .download-link:hover {
             transform: scale(1.02);
             background: #00c97b;
+        }
+
+        .clear-btn {
+            display: inline-block;
+            padding: 10px 20px;
+            background: rgba(255, 255, 255, 0.1);
+            color: #fff;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 8px;
+            font-size: 13px;
+            cursor: pointer;
+            transition: 0.2s;
+            width: 100%;
+        }
+
+        .clear-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+            color: #ff4b2b;
+            border-color: #ff4b2b;
         }
     </style>
 </head>
@@ -216,8 +258,9 @@
         <h1>داونلۆدەری تیکتۆک</h1>
         <p>لینکی ڤیدیۆکە لێرە دابنێ و بەبێ لۆگۆ (Watermark) دایبەزێنە</p>
 
-        <div class="input-group">
-            <input type="text" id="tiktokUrl" placeholder="لینکی ڤیدیۆکە لێرە پەیست بکە...">
+        <div class="input-container">
+            <input type="text" id="tiktokUrl" placeholder="لینکی ڤیدیۆکە لێرە دابنێ...">
+            <button class="paste-btn" onclick="pasteLink()">پەیست</button>
         </div>
 
         <button class="main-btn" onclick="startDownload()">ئامادەکردنی ڤیدیۆ</button>
@@ -226,22 +269,48 @@
         <div id="result"></div>
     </div>
 
-    <!-- Ad Modal -->
     <div class="modal" id="adModal">
         <div class="modal-content">
             <h2 style="margin-bottom: 8px; font-size: 20px;">تکایە چاوەڕێ بە...</h2>
             <p style="color: #555; font-size: 13px; margin-bottom: 0;">ڤیدیۆکەت ئامادە دەکرێت، تکایە پاڵپشتیمان بکە بە سەیرکردنی ئەم ڕیکلامە</p>
             
             <div class="ad-space">
-                شوێنی ڕیکلام (بۆ داهاتوو)
-            </div>
+    <script type="text/javascript">
+        atOptions = {
+            'key' : 'f1431245a7d4320b5b9d14bb7c275137',
+            'format' : 'iframe',
+            'height' : 250,
+            'width' : 300,
+            'params' : {}
+        };
+    </script>
+    <script type="text/javascript" src="https://www.highperformanceformat.com/f1431245a7d4320b5b9d14bb7c275137/invoke.js"></script>
+</div>
 
-            <button class="close-btn" id="closeAdBtn" disabled>چاوەڕێ بە (5)</button>
+            <button class="close-btn" id="closeAdBtn" disabled>چاوەڕێ بە (10)</button>
         </div>
     </div>
 
     <script>
-        let globalVideoUrl = ""; // خەزنکردنی لینکی ڤیدیۆکە بە شێوەی کاتی
+        let globalVideoUrl = ""; 
+
+        // فەنکشنی پەیستکردنی ئۆتۆماتیکی
+        async function pasteLink() {
+            try {
+                const text = await navigator.clipboard.readText();
+                document.getElementById("tiktokUrl").value = text;
+            } catch (err) {
+                alert("ببوورە، براوزەرەکەت ڕێگەی نەدا بە کۆپیکردنی ئۆتۆماتیکی. تکایە بە دەست پەیستی بکە.");
+            }
+        }
+
+        // فەنکشنی پاککردنەوەی پەیجەکە بۆ ڤیدیۆیەکی نوێ
+        function clearForm() {
+            document.getElementById("tiktokUrl").value = "";
+            document.getElementById("result").style.display = "none";
+            document.getElementById("result").innerHTML = "";
+            globalVideoUrl = "";
+        }
 
         function startDownload() {
             let urlInput = document.getElementById("tiktokUrl").value;
@@ -254,7 +323,7 @@
             document.getElementById("result").style.display = "none";
             document.getElementById("adModal").style.display = "flex";
             
-            let timeLeft = 5;
+            let timeLeft = 10; // گۆڕدرا بۆ ١٠ چرکە
             let closeBtn = document.getElementById("closeAdBtn");
             closeBtn.disabled = true;
             closeBtn.classList.remove("active");
@@ -290,11 +359,12 @@
                 document.getElementById("loading").style.display = "none";
 
                 if(data.code === 0 && data.data && data.data.play) {
-                    globalVideoUrl = data.data.play; // بەستنەوەی بە لینکە ڕاستەقینەکەوە
+                    globalVideoUrl = data.data.play; 
                     
                     resultDiv.innerHTML = `
                         <h3 style="color: #00ea90; margin-bottom: 12px; font-size: 18px;">ڤیدیۆکە ئامادەیە! 🎉</h3>
                         <button onclick="forceDownloadVideo()" class="download-link">داگرتن و پاشەکەوتکردن</button>
+                        <button onclick="clearForm()" class="clear-btn">سڕینەوە و ڤیدیۆیەکی تر 🔄</button>
                     `;
                     resultDiv.style.display = "block";
                 } else {
@@ -307,7 +377,6 @@
             }
         }
 
-        // فەنکشنی سحری بۆ ناچارکردنی براوزەر بۆ داگرتنی ڤیدیۆکە
         async function forceDownloadVideo() {
             if (!globalVideoUrl) return;
             
@@ -317,26 +386,22 @@
             downloadBtn.disabled = true;
 
             try {
-                // هێنانی ڤیدیۆکە وەک بلۆب بۆ ڕێگری لە لێدانی ڕاستەوخۆ
                 let response = await fetch(globalVideoUrl);
                 let blob = await response.blob();
                 let blobUrl = URL.createObjectURL(blob);
                 
-                // دروستکردنی توخمێکی کاتی بۆ کلیک کردن و داگرتن
                 let tempAnchor = document.createElement("a");
                 tempAnchor.href = blobUrl;
-                tempAnchor.download = "tiktok_video_" + Date.now() + ".mp4"; // ناوی فایلەکە
+                tempAnchor.download = "tiktok_video_" + Date.now() + ".mp4"; 
                 document.body.appendChild(tempAnchor);
-                tempAnchor.click(); // ئەنجامدانی داونلۆدی ناچاری
+                tempAnchor.click(); 
                 
-                // پاککردنەوەی فەزای میمۆری
                 document.body.removeChild(tempAnchor);
                 URL.revokeObjectURL(blobUrl);
                 
                 downloadBtn.innerText = originalText;
                 downloadBtn.disabled = false;
             } catch (error) {
-                // ئەگەر کێشەیەک لە سێرڤەرەکە دروست بوو، وەک ڕێگای یەدەگ لینکەکە دەکاتەوە
                 window.open(globalVideoUrl, '_blank');
                 downloadBtn.innerText = originalText;
                 downloadBtn.disabled = false;
