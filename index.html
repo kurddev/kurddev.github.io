@@ -2,9 +2,8 @@
 <html lang="ckb" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>داونلۆدەری تیکتۆک | پڕۆفیشناڵ</title>
-    <!-- لێرەدا فۆنتەکەمان گۆڕی بۆ یەکێک کە ١٠٠٪ پشتگیری کوردی دەکات -->
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Arabic:wght@400;700&display=swap" rel="stylesheet">
     
     <style>
@@ -12,17 +11,23 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Noto Sans Arabic', Tahoma, sans-serif; /* بەکارهێنانی فۆنتە نوێیەکە */
+            font-family: 'Noto Sans Arabic', Tahoma, sans-serif;
+        }
+
+        html, body {
+            width: 100%;
+            height: 100%;
+            /* چارەسەری جوڵانی لایەکان */
+            overflow-x: hidden; 
+            background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
         }
 
         body {
-            background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
-            min-height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
             color: #fff;
-            overflow: hidden;
+            padding: 15px;
         }
 
         /* Glassmorphism Container */
@@ -32,37 +37,36 @@
             -webkit-backdrop-filter: blur(15px);
             border: 1px solid rgba(255, 255, 255, 0.1);
             border-radius: 20px;
-            padding: 40px;
-            width: 90%;
-            max-width: 500px;
+            padding: 30px 20px;
+            width: 100%;
+            max-width: 450px;
             text-align: center;
             box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
-            animation: fadeIn 1s ease-in-out;
+            animation: fadeIn 0.8s ease-in-out;
         }
 
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(-20px); }
+            from { opacity: 0; transform: translateY(-15px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
         h1 {
-            font-size: 28px;
-            margin-bottom: 15px;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+            font-size: 26px;
+            margin-bottom: 12px;
             background: -webkit-linear-gradient(#00f2fe, #4facfe);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
 
         p {
-            font-size: 14px;
+            font-size: 13.5px;
             color: #ccc;
-            margin-bottom: 30px;
+            margin-bottom: 25px;
             line-height: 1.6;
         }
 
         .input-group {
-            position: relative;
+            width: 100%;
             margin-bottom: 20px;
         }
 
@@ -73,33 +77,34 @@
             border: 1px solid rgba(255, 255, 255, 0.2);
             background: rgba(0, 0, 0, 0.2);
             color: #fff;
-            font-size: 15px;
+            font-size: 14px;
             outline: none;
             transition: 0.3s;
+            text-align: right;
         }
 
         input:focus {
             border-color: #4facfe;
-            box-shadow: 0 0 10px rgba(79, 172, 254, 0.5);
+            box-shadow: 0 0 10px rgba(79, 172, 254, 0.4);
         }
 
-        button {
+        .main-btn {
             width: 100%;
             padding: 15px;
             border: none;
             border-radius: 10px;
             background: linear-gradient(45deg, #00f2fe, #4facfe);
             color: #fff;
-            font-size: 18px;
+            font-size: 16px;
             font-weight: bold;
             cursor: pointer;
             transition: 0.3s;
-            box-shadow: 0 4px 15px rgba(0, 242, 254, 0.4);
+            box-shadow: 0 4px 15px rgba(0, 242, 254, 0.3);
         }
 
-        button:hover {
-            transform: scale(1.05);
-            box-shadow: 0 6px 20px rgba(0, 242, 254, 0.6);
+        .main-btn:hover {
+            transform: scale(1.02);
+            box-shadow: 0 6px 20px rgba(0, 242, 254, 0.5);
         }
 
         /* Ad Modal Styles */
@@ -107,50 +112,52 @@
             display: none;
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0, 0, 0, 0.8);
+            background: rgba(0, 0, 0, 0.85);
             backdrop-filter: blur(5px);
             justify-content: center;
             align-items: center;
             z-index: 1000;
+            padding: 20px;
         }
 
         .modal-content {
             background: #fff;
             color: #333;
-            padding: 30px;
+            padding: 25px;
             border-radius: 15px;
             text-align: center;
-            width: 90%;
-            max-width: 400px;
-            position: relative;
+            width: 100%;
+            max-width: 380px;
             box-shadow: 0 10px 30px rgba(0,0,0,0.5);
         }
 
         .ad-space {
-            background: #eee;
-            border: 2px dashed #ccc;
-            height: 150px;
+            background: #f0f0f0;
+            border: 2px dashed #bbb;
+            height: 140px;
             display: flex;
             justify-content: center;
             align-items: center;
             margin: 20px 0;
             border-radius: 10px;
             font-weight: bold;
-            color: #888;
+            color: #777;
+            font-size: 14px;
         }
 
         .close-btn {
             background: #ff4b2b;
-            box-shadow: 0 4px 15px rgba(255, 75, 43, 0.4);
-            margin-top: 15px;
-            opacity: 0.5;
-            cursor: not-allowed;
+            box-shadow: 0 4px 15px rgba(255, 75, 43, 0.3);
             color: white;
-            padding: 10px;
+            padding: 12px;
             border: none;
             border-radius: 8px;
             width: 100%;
-            font-size: 16px;
+            font-size: 15px;
+            font-weight: bold;
+            opacity: 0.5;
+            cursor: not-allowed;
+            transition: 0.3s;
         }
 
         .close-btn.active {
@@ -164,8 +171,8 @@
             border: 4px solid rgba(255,255,255,0.1);
             border-top: 4px solid #00f2fe;
             border-radius: 50%;
-            width: 40px;
-            height: 40px;
+            width: 35px;
+            height: 35px;
             animation: spin 1s linear infinite;
             margin: 20px auto;
         }
@@ -184,18 +191,21 @@
         .download-link {
             display: inline-block;
             margin-top: 10px;
-            padding: 12px 25px;
+            padding: 12px 30px;
             background: #00ea90;
             color: #000;
-            text-decoration: none;
+            border: none;
             border-radius: 8px;
+            font-size: 15px;
             font-weight: bold;
+            cursor: pointer;
             transition: 0.3s;
-            box-shadow: 0 4px 15px rgba(0, 234, 144, 0.4);
+            box-shadow: 0 4px 15px rgba(0, 234, 144, 0.3);
+            width: 100%;
         }
         
         .download-link:hover {
-            transform: scale(1.05);
+            transform: scale(1.02);
             background: #00c97b;
         }
     </style>
@@ -207,22 +217,20 @@
         <p>لینکی ڤیدیۆکە لێرە دابنێ و بەبێ لۆگۆ (Watermark) دایبەزێنە</p>
 
         <div class="input-group">
-            <input type="text" id="tiktokUrl" placeholder="لینکی ڤیدیۆکە لێرە دابنێ (کۆپی و پەیست)...">
+            <input type="text" id="tiktokUrl" placeholder="لینکی ڤیدیۆکە لێرە پەیست بکە...">
         </div>
 
-        <button onclick="startDownload()">ئامادەکردنی ڤیدیۆ</button>
+        <button class="main-btn" onclick="startDownload()">ئامادەکردنی ڤیدیۆ</button>
         
         <div class="loader" id="loading"></div>
-        <div id="result">
-            <!-- لێرەدا دوگمەی داگرتن دروست دەبێت دوای هێنانی لە API -->
-        </div>
+        <div id="result"></div>
     </div>
 
     <!-- Ad Modal -->
     <div class="modal" id="adModal">
         <div class="modal-content">
-            <h2 style="margin-bottom: 10px;">تکایە چاوەڕێ بە...</h2>
-            <p style="color: #666; font-size: 13px;">ڤیدیۆکەت ئامادە دەکرێت، تکایە پاڵپشتیمان بکە بە سەیرکردنی ئەم ڕیکلامە</p>
+            <h2 style="margin-bottom: 8px; font-size: 20px;">تکایە چاوەڕێ بە...</h2>
+            <p style="color: #555; font-size: 13px; margin-bottom: 0;">ڤیدیۆکەت ئامادە دەکرێت، تکایە پاڵپشتیمان بکە بە سەیرکردنی ئەم ڕیکلامە</p>
             
             <div class="ad-space">
                 شوێنی ڕیکلام (بۆ داهاتوو)
@@ -233,6 +241,8 @@
     </div>
 
     <script>
+        let globalVideoUrl = ""; // خەزنکردنی لینکی ڤیدیۆکە بە شێوەی کاتی
+
         function startDownload() {
             let urlInput = document.getElementById("tiktokUrl").value;
             
@@ -241,7 +251,6 @@
                 return;
             }
 
-            // شاردنەوەی ئەنجامی پێشوو ئەگەر هەبێت
             document.getElementById("result").style.display = "none";
             document.getElementById("adModal").style.display = "flex";
             
@@ -249,6 +258,7 @@
             let closeBtn = document.getElementById("closeAdBtn");
             closeBtn.disabled = true;
             closeBtn.classList.remove("active");
+            closeBtn.innerText = `چاوەڕێ بە (${timeLeft})`;
 
             let timer = setInterval(function() {
                 timeLeft--;
@@ -262,33 +272,29 @@
                     
                     closeBtn.onclick = function() {
                         document.getElementById("adModal").style.display = "none";
-                        fetchVideoFromAPI(urlInput); // ناردنی لینکەکە بۆ API
+                        fetchVideoFromAPI(urlInput);
                     };
                 }
             }, 1000);
         }
 
-        // فەنکشنی تایبەت بە هێنانی داتا لە Public API
         async function fetchVideoFromAPI(tiktokUrl) {
             document.getElementById("loading").style.display = "block";
             let resultDiv = document.getElementById("result");
             
             try {
-                // بەکارهێنانی API ی TikWM
                 let apiUrl = 'https://www.tikwm.com/api/?url=' + encodeURIComponent(tiktokUrl);
-                
                 let response = await fetch(apiUrl);
                 let data = await response.json();
 
                 document.getElementById("loading").style.display = "none";
 
-                // پشکنین بزانین API یەکە ڤیدیۆکەی دۆزیوەتەوە
                 if(data.code === 0 && data.data && data.data.play) {
-                    let videoWithoutWatermark = data.data.play;
+                    globalVideoUrl = data.data.play; // بەستنەوەی بە لینکە ڕاستەقینەکەوە
                     
                     resultDiv.innerHTML = `
-                        <h3 style="color: #00ea90; margin-bottom: 15px;">ڤیدیۆکە ئامادەیە! 🎉</h3>
-                        <a href="${videoWithoutWatermark}" target="_blank" class="download-link">داگرتنی ڤیدیۆ بەبێ لۆگۆ</a>
+                        <h3 style="color: #00ea90; margin-bottom: 12px; font-size: 18px;">ڤیدیۆکە ئامادەیە! 🎉</h3>
+                        <button onclick="forceDownloadVideo()" class="download-link">داگرتن و پاشەکەوتکردن</button>
                     `;
                     resultDiv.style.display = "block";
                 } else {
@@ -297,8 +303,43 @@
                 
             } catch (error) {
                 document.getElementById("loading").style.display = "none";
-                alert("کێشەیەک لە هێڵی ئینتەرنێت یان سێرڤەری API هەیە، تکایە دواتر هەوڵ بدەرەوە.");
-                console.error("API Error:", error);
+                alert("کێشەیەک لە هێڵی ئینتەرنێت هەیە، تکایە دواتر هەوڵ بدەرەوە.");
+            }
+        }
+
+        // فەنکشنی سحری بۆ ناچارکردنی براوزەر بۆ داگرتنی ڤیدیۆکە
+        async function forceDownloadVideo() {
+            if (!globalVideoUrl) return;
+            
+            let downloadBtn = document.querySelector(".download-link");
+            let originalText = downloadBtn.innerText;
+            downloadBtn.innerText = "داگرتن دەستی پێکرد...";
+            downloadBtn.disabled = true;
+
+            try {
+                // هێنانی ڤیدیۆکە وەک بلۆب بۆ ڕێگری لە لێدانی ڕاستەوخۆ
+                let response = await fetch(globalVideoUrl);
+                let blob = await response.blob();
+                let blobUrl = URL.createObjectURL(blob);
+                
+                // دروستکردنی توخمێکی کاتی بۆ کلیک کردن و داگرتن
+                let tempAnchor = document.createElement("a");
+                tempAnchor.href = blobUrl;
+                tempAnchor.download = "tiktok_video_" + Date.now() + ".mp4"; // ناوی فایلەکە
+                document.body.appendChild(tempAnchor);
+                tempAnchor.click(); // ئەنجامدانی داونلۆدی ناچاری
+                
+                // پاککردنەوەی فەزای میمۆری
+                document.body.removeChild(tempAnchor);
+                URL.revokeObjectURL(blobUrl);
+                
+                downloadBtn.innerText = originalText;
+                downloadBtn.disabled = false;
+            } catch (error) {
+                // ئەگەر کێشەیەک لە سێرڤەرەکە دروست بوو، وەک ڕێگای یەدەگ لینکەکە دەکاتەوە
+                window.open(globalVideoUrl, '_blank');
+                downloadBtn.innerText = originalText;
+                downloadBtn.disabled = false;
             }
         }
     </script>
