@@ -63,7 +63,6 @@
             line-height: 1.6;
         }
 
-        /* بۆکسێکی تایبەت بۆ کۆنتڕۆڵکردنی ئینپوت و دوگمەی پەیست لە ناویدا */
         .input-container {
             position: relative;
             width: 100%;
@@ -74,7 +73,7 @@
 
         input {
             width: 100%;
-            padding: 15px 15px 15px 65px; /* فەزا بۆ لای چەپ بۆ ئەوەی دەقەکە نەچێتە سەر دوگمەی پەیست */
+            padding: 15px 15px 15px 65px; 
             border-radius: 10px;
             border: 1px solid rgba(255, 255, 255, 0.2);
             background: rgba(0, 0, 0, 0.2);
@@ -83,7 +82,7 @@
             outline: none;
             transition: 0.3s;
             text-align: right;
-            direction: ltr; /* بۆ ئەوەی بەستەری ئینگلیزی تیکتۆک ڕێک دەربکەوێت */
+            direction: ltr; 
         }
 
         input:focus {
@@ -91,7 +90,6 @@
             box-shadow: 0 0 10px rgba(79, 172, 254, 0.4);
         }
 
-        /* دوگمەی پەیستکردنی ناو بۆکسەکە */
         .paste-btn {
             position: absolute;
             left: 8px;
@@ -143,6 +141,7 @@
             padding: 20px;
         }
 
+        /* لێرەدا پانی بۆکسەکەمان ڕێکخستووە تا لەگەڵ قەبارەی ڕیکلامەکە بگونجێت */
         .modal-content {
             background: #fff;
             color: #333;
@@ -150,22 +149,21 @@
             border-radius: 15px;
             text-align: center;
             width: 100%;
-            max-width: 380px;
+            max-width: 340px; 
             box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            box-sizing: border-box;
         }
 
+        /* لێرەدا قەبارەی تەواوی بۆکسەکەی ڕیکلامەکامان داناوە و فەزامان پێداوە */
         .ad-space {
-            background: #f0f0f0;
-            border: 2px dashed #bbb;
-            height: 140px;
+            width: 300px;
+            height: 250px;
+            margin: 15px auto; 
             display: flex;
             justify-content: center;
             align-items: center;
-            margin: 20px 0;
+            overflow: hidden; 
             border-radius: 10px;
-            font-weight: bold;
-            color: #777;
-            font-size: 14px;
         }
 
         .close-btn {
@@ -275,17 +273,17 @@
             <p style="color: #555; font-size: 13px; margin-bottom: 0;">ڤیدیۆکەت ئامادە دەکرێت، تکایە پاڵپشتیمان بکە بە سەیرکردنی ئەم ڕیکلامە</p>
             
             <div class="ad-space">
-    <script type="text/javascript">
-        atOptions = {
-            'key' : 'f1431245a7d4320b5b9d14bb7c275137',
-            'format' : 'iframe',
-            'height' : 250,
-            'width' : 300,
-            'params' : {}
-        };
-    </script>
-    <script type="text/javascript" src="https://www.highperformanceformat.com/f1431245a7d4320b5b9d14bb7c275137/invoke.js"></script>
-</div>
+                <script type="text/javascript">
+                    atOptions = {
+                        'key' : 'f1431245a7d4320b5b9d14bb7c275137',
+                        'format' : 'iframe',
+                        'height' : 250,
+                        'width' : 300,
+                        'params' : {}
+                    };
+                </script>
+                <script type="text/javascript" src="https://www.highperformanceformat.com/f1431245a7d4320b5b9d14bb7c275137/invoke.js"></script>
+            </div>
 
             <button class="close-btn" id="closeAdBtn" disabled>چاوەڕێ بە (10)</button>
         </div>
@@ -294,7 +292,6 @@
     <script>
         let globalVideoUrl = ""; 
 
-        // فەنکشنی پەیستکردنی ئۆتۆماتیکی
         async function pasteLink() {
             try {
                 const text = await navigator.clipboard.readText();
@@ -304,7 +301,6 @@
             }
         }
 
-        // فەنکشنی پاککردنەوەی پەیجەکە بۆ ڤیدیۆیەکی نوێ
         function clearForm() {
             document.getElementById("tiktokUrl").value = "";
             document.getElementById("result").style.display = "none";
@@ -323,7 +319,7 @@
             document.getElementById("result").style.display = "none";
             document.getElementById("adModal").style.display = "flex";
             
-            let timeLeft = 10; // گۆڕدرا بۆ ١٠ چرکە
+            let timeLeft = 10; 
             let closeBtn = document.getElementById("closeAdBtn");
             closeBtn.disabled = true;
             closeBtn.classList.remove("active");
@@ -335,7 +331,7 @@
 
                 if(timeLeft <= 0) {
                     clearInterval(timer);
-                    closeBtn.innerText = "داخستنی ڕیکلام و هێنانی ڤیدیۆ";
+                    closeBtn.innerText = "داخستنی ڕیکلامە و هێنانی ڤیدیۆ";
                     closeBtn.disabled = false;
                     closeBtn.classList.add("active");
                     
@@ -408,6 +404,5 @@
             }
         }
     </script>
-
 </body>
 </html>
